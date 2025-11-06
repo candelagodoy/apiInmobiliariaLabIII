@@ -14,10 +14,11 @@ namespace Inmobiliaria_.Net_Core.Models
         }
         
         public DbSet<Propietario> Propietario { get; set; }
+		public DbSet<Inmueble> Inmuebles { get; set; }
 
 		/*
 		public DbSet<Inquilino> Inquilinos { get; set; }
-		public DbSet<Inmueble> Inmuebles { get; set; }
+		
 
 		public DbSet<Persona> Personas { get; set; }
 		public DbSet<Pasatiempo> Pasatiempos { get; set; }

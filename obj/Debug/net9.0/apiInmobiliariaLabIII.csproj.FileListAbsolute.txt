@@ -43,3 +43,4 @@ C:\Users\NoxiePC\Documents\GitHub\apiInmobiliariaLabIII\obj\Debug\net9.0\refint\
 C:\Users\NoxiePC\Documents\GitHub\apiInmobiliariaLabIII\obj\Debug\net9.0\apiInmobiliariaLabIII.pdb
 C:\Users\NoxiePC\Documents\GitHub\apiInmobiliariaLabIII\obj\Debug\net9.0\apiInmobiliariaLabIII.genruntimeconfig.cache
 C:\Users\NoxiePC\Documents\GitHub\apiInmobiliariaLabIII\obj\Debug\net9.0\ref\apiInmobiliariaLabIII.dll
+C:\Users\NoxiePC\Documents\GitHub\apiInmobiliariaLabIII\obj\Debug\net9.0\apiInmobiliariaLabIII.sourcelink.json
