@@ -1,7 +1,7 @@
 
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using Inmobiliaria_.Net_Core.Models;
+using apiInmobiliariaLabIII.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Mvc;

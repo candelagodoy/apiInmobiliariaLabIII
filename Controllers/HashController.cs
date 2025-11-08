@@ -1,8 +1,8 @@
 
 
 using Microsoft.AspNetCore.Mvc;
-using Inmobiliaria_.Net_Core.Models;
-using apiInmobiliariaLabIII;
+using apiInmobiliariaLabIII.Models;
+
 
 
 namespace apiInmobiliariaLabIII

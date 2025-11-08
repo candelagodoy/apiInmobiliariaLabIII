@@ -1,7 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Inmobiliaria_.Net_Core.Models;
+using apiInmobiliariaLabIII.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Mvc;
@@ -54,7 +54,7 @@ namespace apiInmobiliariaLabIII
         {
             try
             {
-                string emailToken = User.Identity?.Name;//verificar el usuario logeado edl token
+                string emailToken = User.Identity?.Name;//verificar el usuario logeado del token
                 if (emailToken == null)
                 {
                     return Unauthorized("Usuario no autorizado");
@@ -64,7 +64,7 @@ namespace apiInmobiliariaLabIII
                 {
                     return NotFound("Propietario no encontrado");
                 }
-                var inmuebleOriginal = await context.Inmuebles.FirstOrDefaultAsync(x => x.idInmueble == inmueble.idInmueble);//inmueble de la base
+                var inmuebleOriginal = await context.Inmuebles.FindAsync(inmueble.idInmueble);//inmueble de la base
                 if (inmuebleOriginal == null)
                 {
                     return NotFound("Inmueble no encontrado");
@@ -83,6 +83,92 @@ namespace apiInmobiliariaLabIII
                 return BadRequest(ex.Message);
             }
         }
+        [HttpPost("cargarInmueble")]
+        public async Task<IActionResult> cargarInmueble([FromForm] IFormFile imagen, [FromForm] string inmueble)
+        {
+            try
+            {
+                string emailToken = User.Identity?.Name;//verificar el usuario logeado edl token
+                if (emailToken == null)
+                {
+                    return Unauthorized("Usuario no autorizado");
+                }
 
+                var propietario = context.Propietario.FirstOrDefault(x => x.email == emailToken);//verificar el propietario
+
+                if (propietario == null)
+                {
+                    return NotFound("Propietario no encontrado");
+                }
+
+                var nuevoInmueble = System.Text.Json.JsonSerializer.Deserialize<Inmueble>(inmueble);
+
+                nuevoInmueble.disponible = false;//seteo el estado en desabilitado
+                nuevoInmueble.idPropietario = propietario.idPropietario;//asigno el id del propietario
+
+                if (imagen != null && imagen.Length > 0)//verifico que la foto no este vacia
+                {
+                    string carpetaCarga = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "cargadas");//construyo ruta
+                    if (!Directory.Exists(carpetaCarga))//si la carpeta no existe la creo
+                    {
+                        Directory.CreateDirectory(carpetaCarga);
+                    }
+
+                    string nombreArchivoUnico = Guid.NewGuid().ToString() + Path.GetExtension(imagen.FileName);//genero un nombre unico para el archivo
+                    string rutaArchivo = Path.Combine(carpetaCarga, nombreArchivoUnico);//genero la ruta completa del archivo
+
+                    using (var stream = new FileStream(rutaArchivo, FileMode.Create))
+                    {
+                        await imagen.CopyToAsync(stream);
+                    }
+
+                    nuevoInmueble.imagen = nombreArchivoUnico;//asigno el nombre del archivo al inmueble
+                }
+
+                context.Inmuebles.Add(nuevoInmueble);//agrego el inmueble a la base
+
+                await context.SaveChangesAsync();
+
+                return Ok(nuevoInmueble);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("buscarPorId/{idInmueble}")]
+        public async Task<IActionResult> buscarPorId(int idInmueble)
+        {
+            try
+            {
+                string emailToken = User.Identity?.Name;//verificar el usuario logeado del token
+                if (emailToken == null)
+                {
+                    return Unauthorized("Usuario no autorizado");
+                }
+                var propietario = context.Propietario.FirstOrDefault(x => x.email == emailToken);//verificar el propietario
+                if (propietario == null)
+                {
+                    return NotFound("Propietario no encontrado");
+                }
+                var inmueble = await context.Inmuebles.FindAsync(idInmueble);//busco el inmueble en la base
+                if (inmueble == null)
+                {
+                    return NotFound("Inmueble no encontrado");
+                }
+                if (inmueble.duenio.idPropietario != propietario.idPropietario)//verificar que el propietario sea el duenio del inmueble
+                {
+                    return BadRequest("Inmueble no pertenece al propietario");
+                }
+                return Ok(inmueble);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
+
+
 }

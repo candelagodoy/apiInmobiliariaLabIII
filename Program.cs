@@ -1,4 +1,4 @@
-using Inmobiliaria_.Net_Core.Models;
+using apiInmobiliariaLabIII;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;

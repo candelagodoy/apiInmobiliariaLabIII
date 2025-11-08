@@ -1,5 +1,6 @@
 C:\Users\NoxiePC\Documents\GitHub\apiInmobiliariaLabIII\bin\Debug\net9.0\appsettings.Development.json
 C:\Users\NoxiePC\Documents\GitHub\apiInmobiliariaLabIII\bin\Debug\net9.0\appsettings.json
+C:\Users\NoxiePC\Documents\GitHub\apiInmobiliariaLabIII\bin\Debug\net9.0\apiInmobiliariaLabIII.staticwebassets.runtime.json
 C:\Users\NoxiePC\Documents\GitHub\apiInmobiliariaLabIII\bin\Debug\net9.0\apiInmobiliariaLabIII.staticwebassets.endpoints.json
 C:\Users\NoxiePC\Documents\GitHub\apiInmobiliariaLabIII\bin\Debug\net9.0\apiInmobiliariaLabIII.exe
 C:\Users\NoxiePC\Documents\GitHub\apiInmobiliariaLabIII\bin\Debug\net9.0\apiInmobiliariaLabIII.deps.json
@@ -29,6 +30,7 @@ C:\Users\NoxiePC\Documents\GitHub\apiInmobiliariaLabIII\obj\Debug\net9.0\apiInmo
 C:\Users\NoxiePC\Documents\GitHub\apiInmobiliariaLabIII\obj\Debug\net9.0\apiInmobiliariaLabIII.csproj.CoreCompileInputs.cache
 C:\Users\NoxiePC\Documents\GitHub\apiInmobiliariaLabIII\obj\Debug\net9.0\apiInmobiliariaLabIII.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\NoxiePC\Documents\GitHub\apiInmobiliariaLabIII\obj\Debug\net9.0\apiInmobiliariaLabIII.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\NoxiePC\Documents\GitHub\apiInmobiliariaLabIII\obj\Debug\net9.0\apiInmobiliariaLabIII.sourcelink.json
 C:\Users\NoxiePC\Documents\GitHub\apiInmobiliariaLabIII\obj\Debug\net9.0\rjimswa.dswa.cache.json
 C:\Users\NoxiePC\Documents\GitHub\apiInmobiliariaLabIII\obj\Debug\net9.0\rjsmrazor.dswa.cache.json
 C:\Users\NoxiePC\Documents\GitHub\apiInmobiliariaLabIII\obj\Debug\net9.0\rjsmcshtml.dswa.cache.json
@@ -43,4 +45,3 @@ C:\Users\NoxiePC\Documents\GitHub\apiInmobiliariaLabIII\obj\Debug\net9.0\refint\
 C:\Users\NoxiePC\Documents\GitHub\apiInmobiliariaLabIII\obj\Debug\net9.0\apiInmobiliariaLabIII.pdb
 C:\Users\NoxiePC\Documents\GitHub\apiInmobiliariaLabIII\obj\Debug\net9.0\apiInmobiliariaLabIII.genruntimeconfig.cache
 C:\Users\NoxiePC\Documents\GitHub\apiInmobiliariaLabIII\obj\Debug\net9.0\ref\apiInmobiliariaLabIII.dll
-C:\Users\NoxiePC\Documents\GitHub\apiInmobiliariaLabIII\obj\Debug\net9.0\apiInmobiliariaLabIII.sourcelink.json
