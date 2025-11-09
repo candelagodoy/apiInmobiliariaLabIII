@@ -103,29 +103,29 @@ namespace apiInmobiliariaLabIII
                     return NotFound("Propietario no encontrado");
                 }
 
-                inmueble.disponible = false;//seteo el estado en desabilitado
-                inmueble.idPropietario = propietario.idPropietario;//asigno el id del propietario
+                inmueble.disponible = false;
+                inmueble.idPropietario = propietario.idPropietario;
 
                 if (imagen != null && imagen.Length > 0)//verifico que la foto no este vacia
                 {
                     string carpetaCarga = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "cargadas");//construyo ruta
-                    if (!Directory.Exists(carpetaCarga))//si la carpeta no existe la creo
+                    if (!Directory.Exists(carpetaCarga))
                     {
                         Directory.CreateDirectory(carpetaCarga);
                     }
 
                     string nombreArchivoUnico = Guid.NewGuid().ToString() + Path.GetExtension(imagen.FileName);//genero un nombre unico para el archivo
-                    string rutaArchivo = Path.Combine(carpetaCarga, nombreArchivoUnico);//genero la ruta completa del archivo
+                    string rutaArchivo = Path.Combine(carpetaCarga, nombreArchivoUnico);//la ruta completa del archivo
 
-                    using (var stream = new FileStream(rutaArchivo, FileMode.Create))
+                    using (var stream = new FileStream(rutaArchivo, FileMode.Create))//crea el flujo de archivos
                     {
                         await imagen.CopyToAsync(stream);
                     }
 
-                    inmueble.imagen = nombreArchivoUnico;//asigno el nombre del archivo al inmueble
+                    inmueble.imagen = nombreArchivoUnico;//asigno el nombre unico al inmueble
                 }
 
-                context.Inmuebles.Add(inmueble);//agrego el inmueble a la base
+                context.Inmuebles.Add(inmueble);
 
                 await context.SaveChangesAsync();
 
