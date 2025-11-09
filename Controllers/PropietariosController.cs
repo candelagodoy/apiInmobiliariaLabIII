@@ -25,14 +25,6 @@ namespace apiInmobiliariaLabIII
 
         }
 
-        [HttpGet]
-        public IActionResult getPropietarios()
-        {
-            var propietario = context.Propietario.ToList();
-            return Ok(propietario);
-        }
-
-
         [HttpPost("login")]
         [AllowAnonymous]
         public async Task<IActionResult> Login([FromForm] LoginV loginV)
@@ -87,9 +79,19 @@ namespace apiInmobiliariaLabIII
         {
             try
             {
-                string usuario = User?.Identity?.Name ?? "";
-                var propietario = await context.Propietario.SingleOrDefaultAsync(x => x.email == usuario);
-                return Ok(propietario);
+                string emailToken = User.Identity?.Name;
+                if (emailToken == null)
+                {
+                    return Unauthorized("Usuario no autorizado");
+                }
+
+                var usuario = await context.Propietario.SingleOrDefaultAsync(x => x.email == emailToken);
+                if (usuario == null)
+                {
+                    return NotFound("Propietario no encontrado");
+                }
+                
+                return Ok(usuario);
             }
             catch (Exception ex)
             {
@@ -104,8 +106,17 @@ namespace apiInmobiliariaLabIII
             try
             {
                 string emailToken = User.Identity?.Name;//email del usuario autenticado
+                if (emailToken == null)
+                {
+                    return Unauthorized("Usuario no autorizado");
+                }
 
                 var propietarioO = await context.Propietario.FirstOrDefaultAsync(x => x.email == emailToken);//busca el propietario en la base
+
+                if (propietarioO == null)
+                {
+                    return NotFound("Propietario no encontrado");
+                }
 
                 if (string.IsNullOrEmpty(propietario.clave))
                 {
@@ -128,7 +139,7 @@ namespace apiInmobiliariaLabIII
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest($"Error al actualizar los datos: {ex.Message}");
             }
         }
 
