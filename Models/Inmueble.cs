@@ -28,6 +28,9 @@ namespace apiInmobiliariaLabIII.Models
         [ForeignKey(nameof(idPropietario))]
         public Propietario? duenio { get; set; }
         public Boolean? tieneContratoVigente { get; set; }
+
+         [NotMapped]       
+        public IFormFile imagenFile { get; set; }
     
     }
 

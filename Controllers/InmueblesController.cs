@@ -84,10 +84,12 @@ namespace apiInmobiliariaLabIII
             }
         }
         [HttpPost("cargarInmueble")]
-        public async Task<IActionResult> cargarInmueble([FromForm] IFormFile imagen, [FromForm] string inmueble)
+        public async Task<IActionResult> cargarInmueble([FromForm] Inmueble inmueble)
         {
             try
             {
+                var imagen = inmueble.imagenFile;
+
                 string emailToken = User.Identity?.Name;//verificar el usuario logeado edl token
                 if (emailToken == null)
                 {
@@ -101,10 +103,8 @@ namespace apiInmobiliariaLabIII
                     return NotFound("Propietario no encontrado");
                 }
 
-                var nuevoInmueble = System.Text.Json.JsonSerializer.Deserialize<Inmueble>(inmueble);
-
-                nuevoInmueble.disponible = false;//seteo el estado en desabilitado
-                nuevoInmueble.idPropietario = propietario.idPropietario;//asigno el id del propietario
+                inmueble.disponible = false;//seteo el estado en desabilitado
+                inmueble.idPropietario = propietario.idPropietario;//asigno el id del propietario
 
                 if (imagen != null && imagen.Length > 0)//verifico que la foto no este vacia
                 {
@@ -122,14 +122,14 @@ namespace apiInmobiliariaLabIII
                         await imagen.CopyToAsync(stream);
                     }
 
-                    nuevoInmueble.imagen = nombreArchivoUnico;//asigno el nombre del archivo al inmueble
+                    inmueble.imagen = nombreArchivoUnico;//asigno el nombre del archivo al inmueble
                 }
 
-                context.Inmuebles.Add(nuevoInmueble);//agrego el inmueble a la base
+                context.Inmuebles.Add(inmueble);//agrego el inmueble a la base
 
                 await context.SaveChangesAsync();
 
-                return Ok(nuevoInmueble);
+                return Ok(inmueble);
             }
             catch (Exception ex)
             {
